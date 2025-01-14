@@ -13,20 +13,20 @@ app.setSerializerCompiler(serializerCompiler)
 app.register(fastifyCors, { origin: '*' })
 
 app.register(fastifySwagger, {
-    openapi: {
-        info: {
-            title: 'Typed API',
-            version: '1.0.0',
-        }
+  openapi: {
+    info: {
+      title: 'Typed API',
+      version: '1.0.0',
     }
+  }
 })
 
 app.register(fastifySwaggerUi, {
-    routePrefix: '/docs',
+  routePrefix: '/docs',
 })
 
 app.register(routes)
 
 app.listen({ port: 3333 }).then(() => {
-    console.log('HTTP server running!')
+  console.log('HTTP server running!')
 })
