@@ -1,7 +1,7 @@
-import type { FastifyInstance } from "fastify";
 import z from "zod";
+import type { FastifyTypedInstance } from "./types";
 
-export async function routes(app: FastifyInstance) {
+export async function routes(app: FastifyTypedInstance) {
     app.get('users', () => {
         return []
     })
