@@ -21,7 +21,7 @@ Welcome! Here you’ll find a comprehensive guide to building self-descriptive A
 1. Clone this repository:  
    ```bash
    git clone https://github.com/nikumu/backend-typed.git
-   cd repository-name
+   cd backend-typed
    ```  
 2. Install dependencies:  
    ```bash
