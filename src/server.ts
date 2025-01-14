@@ -1,10 +1,11 @@
 import { fastify } from 'fastify'
 import { fastifyCors } from '@fastify/cors'
-import { validatorCompiler, serializerCompiler } from 'fastify-type-provider-zod'
-import fastifySwagger from '@fastify/swagger'
-import fastifySwaggerUi from '@fastify/swagger-ui'
+import { validatorCompiler, serializerCompiler, ZodTypeProvider } from 'fastify-type-provider-zod'
+import { fastifySwagger } from '@fastify/swagger'
+import { fastifySwaggerUi } from '@fastify/swagger-ui'
+import { routes } from './routes'
 
-const app = fastify()
+const app = fastify().withTypeProvider<ZodTypeProvider>()
 
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
@@ -24,9 +25,7 @@ app.register(fastifySwaggerUi, {
     routePrefix: '/docs',
 })
 
-app.get('/', () => {
-    return 'Hello, World!'
-})
+app.register(routes)
 
 app.listen({ port: 3333 }).then(() => {
     console.log('HTTP server running!')
