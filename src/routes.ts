@@ -15,9 +15,16 @@ export async function routes(app: FastifyTypedInstance) {
      schema: {
         tags: ['users'],
         description: 'List users',
-    },
-  },  () => {
-    return []
+        response: {
+          200: z.array(z.object({
+            id: z.string(),
+            name: z.string(),
+            email: z.string(),
+          }))
+        }
+      },
+    }, () => {
+      return users
   })
 
   app.post('/users', {
@@ -28,8 +35,11 @@ export async function routes(app: FastifyTypedInstance) {
         name: z.string(),
         email: z.string().email(),
       }),
+      response: {
+        201: z.null().describe('user created'),
+      },
     }
-  }, (request, reply) => {
+  }, async (request, reply) => {
     const { name, email } = request.body
 
     users.push({
